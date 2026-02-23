@@ -85,16 +85,6 @@ export default function Navigation() {
               </Link>
             </Magnetic>
           ))}
-          <Magnetic intensity={0.35}>
-            <Link
-              href="#join"
-              className="mag-btn"
-              aria-label="Join the club"
-              data-cursor="hover"
-            >
-              Join Now
-            </Link>
-          </Magnetic>
         </nav>
 
         {/* Mobile hamburger */}
@@ -151,14 +141,6 @@ export default function Navigation() {
                   {item.label}
                 </Link>
               ))}
-              <Link
-                href="#join"
-                onClick={() => setMobileOpen(false)}
-                className="mag-btn w-fit mt-2"
-                data-cursor="hover"
-              >
-                Join Now
-              </Link>
             </div>
           </motion.nav>
         )}

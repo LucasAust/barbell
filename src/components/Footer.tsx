@@ -57,7 +57,7 @@ export default function Footer({ instagramHandle, email, joinLink }: FooterProps
               className="font-[family-name:var(--f-body)] text-[var(--muted)]"
               style={{ fontSize: '0.95rem', lineHeight: 1.65, maxWidth: '44ch', fontWeight: 400 }}
             >
-              USC&rsquo;s competitive powerlifting club — USAPL sanctioned, open to all experience levels.
+              USC&rsquo;s competitive powerlifting club — open to all experience levels.
             </p>
           </div>
 
@@ -148,7 +148,6 @@ export default function Footer({ instagramHandle, email, joinLink }: FooterProps
               {[
                 'Columbia, SC',
                 'University of South Carolina',
-                'USAPL Affiliated',
               ].map((line) => (
                 <p key={line} className="font-[family-name:var(--f-body)] text-[var(--muted)]" style={{ fontSize: '0.93rem', fontWeight: 500 }}>
                   {line}

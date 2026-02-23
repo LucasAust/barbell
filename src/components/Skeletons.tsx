@@ -7,11 +7,11 @@ export function EventsSkeleton() {
           <div className="skeleton flex-1 h-px" />
           <div className="skeleton w-24 h-8" />
         </div>
-        <div className="grid grid-cols-1 gap-px bg-[var(--rule)]">
+        <div className="grid grid-cols-1">
           {Array.from({ length: 4 }).map((_, i) => (
             <div
               key={i}
-              className="bg-[var(--panel)] px-6 py-5 grid grid-cols-[52px_1fr_80px] gap-6 items-center"
+              className="px-6 py-5 grid grid-cols-[52px_1fr_80px] gap-6 items-center border-b border-[var(--rule)]"
             >
               <div className="skeleton w-[52px] h-[60px]" />
               <div className="flex flex-col gap-2">
@@ -36,9 +36,9 @@ export function NewsSkeleton() {
           <div className="skeleton flex-1 h-px" />
           <div className="skeleton w-16 h-8" />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--rule)]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {Array.from({ length: 3 }).map((_, i) => (
-            <div key={i} className="bg-[var(--panel)] p-7 flex flex-col gap-4">
+            <div key={i} className="p-7 flex flex-col gap-4 border border-[var(--rule)]">
               <div className="flex justify-between">
                 <div className="skeleton h-5 w-24" />
                 <div className="skeleton h-3 w-12" />
@@ -66,9 +66,9 @@ export function OfficersSkeleton() {
           <div className="skeleton flex-1 h-px" />
           <div className="skeleton w-24 h-8" />
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-px bg-[var(--rule)]">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
           {Array.from({ length: 5 }).map((_, i) => (
-            <div key={i} className="bg-[var(--panel)] p-5 flex flex-col gap-3">
+            <div key={i} className="p-5 flex flex-col gap-3 border border-[var(--rule)]">
               <div className="skeleton w-full aspect-[4/5]" />
               <div className="skeleton h-4 w-3/4" />
               <div className="skeleton h-3 w-1/2" />

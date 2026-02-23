@@ -54,7 +54,7 @@ export default function News({ updates }: NewsProps) {
 
         {/* Pinned — full-width featured card */}
         {pinned.length > 0 && (
-          <div className="mb-px">
+          <div className="mb-8">
             {pinned.map((u, i) => (
               <motion.div
                 key={u._id}
@@ -71,7 +71,7 @@ export default function News({ updates }: NewsProps) {
 
         {/* Grid */}
         {!isEmpty ? (
-          <Stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--rule)]">
+          <Stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {rest.map((update) => (
               <StaggerItem key={update._id} variants={itemVariants}>
                 <UpdateCard update={update} />
@@ -102,7 +102,7 @@ function UpdateCard({ update, pinned }: { update: Update; pinned?: boolean }) {
 
   return (
     <article
-      className={`p-7 flex flex-col gap-4 hover:bg-[rgba(165,0,16,0.05)] transition-all duration-300 h-full border ${pinned ? 'border-[rgba(165,0,16,0.45)]' : 'border-transparent hover:border-[rgba(165,0,16,0.28)]'}`}
+      className={`p-7 flex flex-col gap-4 transition-all duration-500 h-full border ${pinned ? 'border-[rgba(165,0,16,0.45)]' : 'border-[var(--rule)] hover:border-[rgba(165,0,16,0.5)]'}`}
       aria-label={update.title}
     >
       {/* Meta */}

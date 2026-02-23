@@ -45,6 +45,25 @@ export default function Events({ upcoming, archived }: EventsProps) {
           <span className="section-index t-tag">02</span>
         </div>
 
+        {/* Intro text */}
+        <FadeUp delay={0.08}>
+          <p
+            className="font-[family-name:var(--f-body)] text-[var(--stone)] mb-10 max-w-[58ch]"
+            style={{ fontSize: 'var(--size-md)', lineHeight: 1.7, fontWeight: 400 }}
+          >
+            Outside of athletics and the gym, we are all hard-working and dedicated students who are trying to further our education. We don&apos;t always do events related to the gym &mdash; sometimes it&apos;s about setting up something fun with friends.
+          </p>
+        </FadeUp>
+
+        {/* Event types — badge row */}
+        <FadeUp delay={0.14}>
+          <div className="flex flex-wrap gap-3 mb-14">
+            {['Protein Bar Tastings', 'Game Nights', 'Fundraisers', 'Mental Health & Wellness'].map((tag) => (
+              <span key={tag} className="badge badge-social">{tag}</span>
+            ))}
+          </div>
+        </FadeUp>
+
         {upcoming.length === 0 ? (
           <FadeUp>
             <p className="font-[family-name:var(--f-body)] text-[var(--muted)]" style={{ fontSize: '1.1rem', fontWeight: 400 }}>
@@ -56,7 +75,7 @@ export default function Events({ upcoming, archived }: EventsProps) {
             {/* Featured — large cards */}
             {featured.length > 0 && (
               <Stagger
-                className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--rule)] mb-px"
+                className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8"
               >
                 {featured.map((event) => (
                   <StaggerItem key={event._id} variants={itemVariants}>
@@ -67,7 +86,7 @@ export default function Events({ upcoming, archived }: EventsProps) {
             )}
 
             {/* Regular — editorial rows */}
-            <div className="bg-[var(--rule)] grid grid-cols-1 gap-px">
+            <div className="grid grid-cols-1">
               {regular.map((event, i) => (
                 <motion.div
                   key={event._id}
@@ -116,7 +135,7 @@ export default function Events({ upcoming, archived }: EventsProps) {
                     transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                     className="overflow-hidden mt-6"
                   >
-                    <div className="grid grid-cols-1 gap-px bg-[var(--rule)] opacity-60">
+                    <div className="grid grid-cols-1 opacity-60">
                       {archived.map((event) => (
                         <EventRow key={event._id} event={event} />
                       ))}
@@ -136,7 +155,7 @@ export default function Events({ upcoming, archived }: EventsProps) {
 function EventCard({ event }: { event: Event }) {
   return (
     <article
-      className="p-8 lg:p-12 flex flex-col gap-5 group border border-transparent hover:border-[rgba(165,0,16,0.38)] hover:bg-[rgba(165,0,16,0.05)] transition-all duration-300"
+      className="p-8 lg:p-12 flex flex-col gap-5 group border border-[var(--rule)] hover:border-[rgba(165,0,16,0.5)] transition-all duration-500 relative"
       aria-label={event.title}
     >
       <div className="flex items-start justify-between gap-4">
@@ -180,7 +199,7 @@ function EventCard({ event }: { event: Event }) {
 function EventRow({ event }: { event: Event }) {
   return (
     <article
-      className="event-row hover:bg-[rgba(165,0,16,0.05)] transition-all duration-300 border border-transparent hover:border-[rgba(165,0,16,0.3)]"
+      className="event-row transition-all duration-500"
       aria-label={event.title}
     >
       <DateBlock date={event.date} />

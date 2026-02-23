@@ -101,11 +101,7 @@ export default async function Home() {
       <main id="main-content">
         <Hero tagline={settings?.tagline} />
 
-        <About
-          aboutText={aboutText}
-          stats={settings?.aboutStats}
-          meetingInfo={settings?.meetingInfo}
-        />
+        <About />
 
         <Suspense fallback={<EventsSkeleton />}>
           <Events upcoming={upcoming ?? []} archived={archived ?? []} />
@@ -122,8 +118,6 @@ export default async function Home() {
         <PRBoard records={prRecords ?? []} />
 
         <Join
-          duesAmount={settings?.duesAmount}
-          meetingInfo={settings?.meetingInfo}
           joinLink={settings?.joinLink}
           email={settings?.email}
           instagramHandle={settings?.instagramHandle}

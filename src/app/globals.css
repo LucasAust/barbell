@@ -193,15 +193,16 @@ body::after {
   font-size: var(--size-tag);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  padding: 0.3em 0.8em;
-  border: 1px solid currentColor;
-  font-weight: 500;
+  padding: 0.35em 1em;
+  border: 1px solid;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
 }
-.badge-comp   { color: var(--garnet-bright); }
-.badge-meet   { color: #C8A45A; }
-.badge-prac   { color: var(--dust); }
-.badge-social { color: #6B9FC8; }
-.badge-other  { color: var(--dust); }
+.badge-comp   { color: var(--garnet-bright); border-color: rgba(165,0,16,0.5); background: rgba(165,0,16,0.08); }
+.badge-meet   { color: #C8A45A; border-color: rgba(200,164,90,0.35); background: rgba(200,164,90,0.06); }
+.badge-prac   { color: var(--dust); border-color: rgba(122,116,109,0.3); background: rgba(122,116,109,0.06); }
+.badge-social { color: var(--warm-white); border-color: rgba(237,232,223,0.2); background: rgba(237,232,223,0.04); }
+.badge-other  { color: var(--dust); border-color: rgba(122,116,109,0.3); background: rgba(122,116,109,0.06); }
 
 /* ── Portable Text ───────────────────────────────────────────────────── */
 .prose p       { color: var(--stone); line-height: 1.75; margin-bottom: 1.1em; }
@@ -277,9 +278,9 @@ body::after {
   gap: 1.5rem;
   padding: 1.1rem 1.5rem;
   border-bottom: 1px solid var(--rule);
-  transition: background var(--t-fast) ease;
+  transition: border-color var(--t-mid) var(--spring);
 }
-.event-row:hover { background: rgba(165,0,16,0.05); }
+.event-row:hover { border-bottom-color: rgba(165,0,16,0.5); }
 
 /* ── Image hover desaturate → saturate ──────────────────────────────── */
 .img-hover {

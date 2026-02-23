@@ -25,7 +25,7 @@ export default function Officers({ officers }: OfficersProps) {
 
         {!isEmpty ? (
           <Stagger
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-px bg-[var(--rule)]"
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5"
           >
             {safeOfficers.map((officer) => (
               <StaggerItem key={officer._id} variants={itemVariants}>
@@ -55,7 +55,7 @@ function OfficerCard({ officer }: { officer: Officer }) {
 
   return (
     <article
-      className="p-5 flex flex-col gap-3 group hover:bg-[rgba(165,0,16,0.05)] transition-all duration-300 border border-transparent hover:border-[rgba(165,0,16,0.28)]"
+      className="p-5 flex flex-col gap-3 group border border-[var(--rule)] hover:border-[rgba(165,0,16,0.5)] transition-all duration-500"
       aria-label={`${officer.name}, ${officer.role}`}
     >
       {/* Photo */}

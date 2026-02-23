@@ -10,16 +10,9 @@ interface HeroProps {
 }
 
 const TICKER_ITEMS = [
-  'SQUAT', '·', 'BENCH', '·', 'DEADLIFT', '·',
-  'COMPETE', '·', 'USC', '·', 'LIFT HEAVY', '·',
+  'POWERLIFTING', '·', 'BODYBUILDING', '·', 'WEIGHTLIFTING', '·',
+  'COMMUNITY', '·', 'USC', '·', 'LIFT HEAVY', '·',
   'GAMECOCK BARBELL', '·',
-]
-
-const FLOATING_TAGS = ['USAPL READY', 'SPEED + POWER', 'COLUMBIA, SC', 'NEW LIFTERS WELCOME']
-
-const STATS = [
-  { val: '50+', label: 'Members' },
-  { val: 'USAPL', label: 'Sanctioned' },
 ]
 
 /* Particles at different z-depths: size / opacity / position varies for depth illusion */
@@ -35,7 +28,7 @@ const PARTICLES = Array.from({ length: 22 }, (_, i) => ({
   yAmt: 14 + (i % 5) * 9,
 }))
 
-export default function Hero({ tagline = 'Lift Heavy. Compete Hard. Represent USC.' }: HeroProps) {
+export default function Hero({ tagline = 'Strength. Community. Growth. Represent USC.' }: HeroProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end start'] })
   const bgY      = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
@@ -272,8 +265,8 @@ export default function Hero({ tagline = 'Lift Heavy. Compete Hard. Represent US
 
       {/* ── Main content ──────────────────────────────────────────── */}
       <motion.div
-        style={{ y: textY, opacity }}
-        className="relative flex flex-col justify-center h-screen pt-20 pb-24 will-change-transform"
+        style={{ y: textY, opacity, height: 'calc(100vh - 2.5rem)', paddingBottom: '5vh' }}
+        className="relative flex flex-col justify-center items-start will-change-transform"
       >
         <div className="wrap">
           {/* Left vertical accent line */}
@@ -290,7 +283,7 @@ export default function Hero({ tagline = 'Lift Heavy. Compete Hard. Represent US
             initial={{ opacity: 0, x: -16 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="flex items-center gap-3 mb-6"
+            className="flex items-center gap-3 mb-4"
           >
             <span className="block h-px w-10 bg-[var(--garnet)]" aria-hidden="true" />
             <span className="t-tag text-[var(--garnet)]">University of South Carolina</span>
@@ -302,9 +295,9 @@ export default function Hero({ tagline = 'Lift Heavy. Compete Hard. Represent US
             transition={{ duration: 0.18, repeat: Infinity, ease: 'linear', repeatDelay: 7 }}
           >
           <h1
-            className="font-[family-name:var(--f-display)] text-[var(--warm-white)] mb-3 overflow-visible"
+            className="font-[family-name:var(--f-display)] text-[var(--warm-white)] mb-2 overflow-visible"
             style={{
-              fontSize: 'clamp(3rem, 8.5vw, 7.2rem)',
+              fontSize: 'clamp(2.6rem, 7vw, 5.8rem)',
               lineHeight: 0.92,
               letterSpacing: '-0.01em',
               textShadow: '1px 1px 0 #6a000a, 3px 3px 0 #4d0007, 5px 5px 0 #340005, 7px 7px 0 #1e0003, 9px 9px 22px rgba(0,0,0,0.95)',
@@ -334,43 +327,15 @@ export default function Hero({ tagline = 'Lift Heavy. Compete Hard. Represent US
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.45, ease: [0.16, 1, 0.3, 1] }}
-            className="font-[family-name:var(--f-body)] text-[rgba(237,232,223,0.78)] mt-5 mb-5"
+            className="font-[family-name:var(--f-body)] text-[rgba(237,232,223,0.78)] mt-4 mb-4"
             style={{ fontSize: 'clamp(0.95rem, 1.5vw, 1.12rem)', maxWidth: '38ch', lineHeight: 1.6, fontWeight: 400 }}
           >
             {tagline}
           </motion.p>
 
-          {/* Stat chips */}
-          <motion.div
-            className="flex items-center gap-5 mb-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1.55 }}
-          >
-            {STATS.map((s, i) => (
-              <div key={i} className="flex items-center gap-2">
-                <span
-                  className="font-[family-name:var(--f-display)] text-[var(--warm-white)]"
-                  style={{ fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)', fontWeight: 700, letterSpacing: '0.04em' }}
-                >
-                  {s.val}
-                </span>
-                <span
-                  className="font-[family-name:var(--f-body)] text-[rgba(237,232,223,0.45)] uppercase"
-                  style={{ fontSize: '0.65rem', letterSpacing: '0.12em', fontWeight: 500 }}
-                >
-                  {s.label}
-                </span>
-                {i < STATS.length - 1 && (
-                  <span className="ml-3 w-px h-4 bg-[rgba(237,232,223,0.18)]" aria-hidden="true" />
-                )}
-              </div>
-            ))}
-          </motion.div>
-
           {/* CTAs */}
           <motion.div
-            className="flex flex-wrap gap-4"
+            className="flex flex-wrap gap-4 mb-6"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 1.6, ease: [0.16, 1, 0.3, 1] }}
@@ -396,63 +361,6 @@ export default function Hero({ tagline = 'Lift Heavy. Compete Hard. Represent US
             </Magnetic>
           </motion.div>
         </div>
-      </motion.div>
-
-      {/* ── Floating chips — bottom right, 3D card style ────────── */}
-      <motion.div
-        className="absolute hidden lg:flex flex-col gap-3 pointer-events-none"
-        style={{ right: '5%', bottom: '16%', zIndex: 2 }}
-        initial={{ opacity: 0, x: 30 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.9, delay: 1.9, ease: [0.16, 1, 0.3, 1] }}
-        aria-hidden="true"
-      >
-        {FLOATING_TAGS.map((chip, i) => (
-          <motion.span
-            key={chip}
-            className="inline-flex items-center gap-3 self-end"
-            style={{
-              background: 'linear-gradient(135deg, rgba(18,6,6,0.96) 0%, rgba(10,2,2,0.96) 100%)',
-              border: '1px solid rgba(165,0,16,0.5)',
-              borderBottom: '1px solid rgba(165,0,16,0.25)',
-              boxShadow: '0 8px 32px rgba(0,0,0,0.7), 0 2px 0 rgba(200,50,50,0.15) inset, 4px 6px 18px rgba(165,0,16,0.18)',
-              borderRadius: '6px',
-              padding: '0.55rem 1.6rem',
-              fontFamily: 'var(--f-body)',
-              fontSize: '0.76rem',
-              fontWeight: 700,
-              letterSpacing: '0.14em',
-              color: 'rgba(237,232,223,0.9)',
-              transform: `perspective(400px) rotateY(${i % 2 === 0 ? -4 : 4}deg) rotateX(2deg)`,
-            }}
-            animate={{ y: [0, -8, 0], rotateY: [i % 2 === 0 ? -4 : 4, i % 2 === 0 ? -1 : 1, i % 2 === 0 ? -4 : 4] }}
-            transition={{ duration: 3 + i * 0.6, repeat: Infinity, ease: 'easeInOut', delay: i * 0.3 }}
-          >
-            <span
-              style={{
-                width: '5px', height: '5px', borderRadius: '50%', flexShrink: 0,
-                background: 'var(--garnet)', boxShadow: '0 0 10px rgba(165,0,16,1)',
-              }}
-            />
-            {chip}
-          </motion.span>
-        ))}
-      </motion.div>
-
-      {/* ── Scroll indicator ──────────────────────────────────────── */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2.2, duration: 0.6 }}
-        className="absolute bottom-20 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        aria-hidden="true"
-      >
-        <span className="t-tag text-[var(--muted)]" style={{ fontSize: '0.68rem', letterSpacing: '0.2em', opacity: 0.7 }}>SCROLL</span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
-          className="w-px h-10 bg-gradient-to-b from-[var(--muted)] to-transparent"
-        />
       </motion.div>
 
       {/* ── Bottom ticker ─────────────────────────────────────────── */}

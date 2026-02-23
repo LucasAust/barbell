@@ -127,7 +127,7 @@ export default function PRBoard({ records }: PRBoardProps) {
         </FadeUp>
 
         <FadeUp delay={0.2}>
-          <p className="mt-6 font-[family-name:var(--f-body)] text-[rgba(199,192,184,0.92)] uppercase" style={{ fontSize: '0.95rem', letterSpacing: '0.08em', fontWeight: 600 }}>
+          <p className="mt-8 font-[family-name:var(--f-body)] text-[rgba(199,192,184,0.92)] uppercase" style={{ fontSize: '0.95rem', letterSpacing: '0.08em', fontWeight: 600 }}>
             All weights in kg · Ranked by DOTS score
           </p>
         </FadeUp>
