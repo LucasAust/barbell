@@ -45,114 +45,137 @@ export default function About() {
           <span className="section-index t-tag">01</span>
         </div>
 
-        {/* Two-column layout — description + highlights */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 mb-20 lg:mb-28">
-          {/* Left — intro text */}
-          <div className="lg:col-span-5">
-            <FadeUp delay={0.1}>
-              <p
-                className="font-[family-name:var(--f-body)] text-[var(--warm-white)]"
-                style={{ fontSize: 'var(--size-md)', lineHeight: 1.75, fontWeight: 400 }}
-              >
-                Gamecock Barbell Club is a fitness and gym community for the entirety of the University of South Carolina campus. We are an organization focused on physical health and well-being.
-              </p>
-            </FadeUp>
-          </div>
+        {/* ── Mission block — full width ───────────────────────────── */}
+        <div style={{ marginBottom: 'clamp(4rem, 8vw, 7rem)' }}>
+          <FadeUp delay={0.06}>
+            <p
+              className="text-[var(--warm-white)] mb-8 max-w-[22ch]"
+              style={{ fontFamily: "var(--f-display)", fontSize: 'var(--size-2xl)', lineHeight: 1.1, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.02em' }}
+            >
+              A gym community for all of USC.
+            </p>
+          </FadeUp>
+          <FadeUp delay={0.14}>
+            <p
+              className="font-[family-name:var(--f-body)] text-[var(--stone)] max-w-[62ch]"
+              style={{ fontSize: 'var(--size-md)', lineHeight: 1.85, fontWeight: 400 }}
+            >
+              We are an organization focused on physical health and well-being — welcoming everyone from seasoned competitors to those stepping into a gym for the first time.
+            </p>
+          </FadeUp>
+        </div>
 
-          {/* Right — highlights */}
-          <div className="lg:col-span-7">
-            {HIGHLIGHTS.map((text, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: '-5% 0px' }}
-                transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="flex items-start gap-6 py-5 border-b border-[var(--rule)]"
+        {/* ── Highlights — 2-column grid ───────────────────────────── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-0" style={{ marginBottom: 'clamp(5rem, 9vw, 8rem)' }}>
+          {HIGHLIGHTS.map((text, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-5% 0px' }}
+              transition={{ duration: 0.55, delay: i * 0.09, ease: [0.16, 1, 0.3, 1] }}
+              className="flex items-start gap-5 py-7 border-b border-[var(--rule)]"
+            >
+              <span
+                className="font-[family-name:var(--f-mono)] text-[var(--garnet-text)] shrink-0 mt-[0.15em] select-none"
+                style={{ fontSize: '0.65rem', letterSpacing: '0.2em' }}
+                aria-hidden="true"
               >
-                <span className="block w-8 h-px bg-[var(--garnet)] shrink-0 mt-[0.7em]" aria-hidden="true" />
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <p
+                className="font-[family-name:var(--f-body)] text-[var(--stone)]"
+                style={{ fontSize: 'var(--size-base)', lineHeight: 1.8, fontWeight: 400 }}
+              >
+                {text}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* ── Practices ────────────────────────────────────────────── */}
+        <div style={{ marginBottom: 'clamp(5rem, 9vw, 8rem)' }}>
+          <FadeUp>
+            <div className="flex items-baseline justify-between pb-6 border-b border-[var(--rule)]">
+              <h3
+                className="font-[family-name:var(--f-display)] uppercase text-[var(--warm-white)]"
+                style={{ fontSize: 'var(--size-xl)', lineHeight: 1.05, letterSpacing: '0.04em' }}
+              >
+                Practices
+              </h3>
+              <span className="t-tag text-[var(--garnet-text)]">02</span>
+            </div>
+          </FadeUp>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-[var(--rule)]" style={{ marginTop: 'clamp(1.5rem, 3vw, 2.5rem)' }}>
+            {PRACTICES.map((p, i) => (
+              <motion.div
+                key={p.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-5% 0px' }}
+                transition={{ duration: 0.55, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="bg-[var(--panel)] flex flex-col gap-4"
+                style={{ padding: 'clamp(1.75rem, 3.5vw, 2.5rem)' }}
+              >
+                <div className="w-8 h-[2px] bg-[var(--garnet)]" aria-hidden="true" />
                 <p
-                  className="font-[family-name:var(--f-body)] text-[var(--warm-white)]"
-                  style={{ fontSize: 'var(--size-sm)', lineHeight: 1.75, fontWeight: 400, opacity: 0.82 }}
+                  className="font-[family-name:var(--f-display)] uppercase text-[var(--warm-white)]"
+                  style={{ fontSize: 'var(--size-sm)', letterSpacing: '0.1em', fontWeight: 700 }}
                 >
-                  {text}
+                  {p.label}
+                </p>
+                <p
+                  className="font-[family-name:var(--f-body)] text-[var(--stone)]"
+                  style={{ fontSize: 'var(--size-base)', lineHeight: 1.75, fontWeight: 400 }}
+                >
+                  {p.text}
                 </p>
               </motion.div>
             ))}
           </div>
         </div>
 
-        {/* Practices — horizontal strip */}
-        <FadeUp delay={0.15}>
-          <div className="mb-20 lg:mb-28">
-            <h3
-              className="font-[family-name:var(--f-display)] uppercase text-[var(--warm-white)] mb-12"
-              style={{ fontSize: 'var(--size-xl)', lineHeight: 1.05, letterSpacing: '0.04em' }}
-            >
-              Practices
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-12 sm:gap-8">
-              {PRACTICES.map((p, i) => (
-                <motion.div
-                  key={p.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-5% 0px' }}
-                  transition={{ duration: 0.6, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <div className="h-px w-full bg-gradient-to-r from-[var(--garnet)] to-transparent mb-6" aria-hidden="true" />
-                  <p
-                    className="font-[family-name:var(--f-display)] uppercase text-[var(--garnet)]"
-                    style={{ fontSize: 'var(--size-tag)', letterSpacing: '0.14em', fontWeight: 700, marginBottom: '0.75rem' }}
-                  >
-                    {p.label}
-                  </p>
-                  <p
-                    className="font-[family-name:var(--f-body)] text-[var(--warm-white)]"
-                    style={{ fontSize: 'var(--size-sm)', lineHeight: 1.7, fontWeight: 400, opacity: 0.75 }}
-                  >
-                    {p.text}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </FadeUp>
-
-        {/* Sport Subsections */}
+        {/* ── Our Sports ───────────────────────────────────────────── */}
         <div>
-          <h3
-            className="font-[family-name:var(--f-display)] uppercase text-[var(--warm-white)] mb-12"
-            style={{ fontSize: 'var(--size-xl)', lineHeight: 1.05, letterSpacing: '0.04em' }}
-          >
-            Our Sports
-          </h3>
-          <Stagger className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
+          <FadeUp>
+            <div className="flex items-baseline justify-between pb-6 border-b border-[var(--rule)]">
+              <h3
+                className="font-[family-name:var(--f-display)] uppercase text-[var(--warm-white)]"
+                style={{ fontSize: 'var(--size-xl)', lineHeight: 1.05, letterSpacing: '0.04em' }}
+              >
+                Our Sports
+              </h3>
+              <span className="t-tag text-[var(--garnet-text)]">03</span>
+            </div>
+          </FadeUp>
+          <Stagger className="grid grid-cols-1 md:grid-cols-3 gap-5" style={{ marginTop: 'clamp(1.5rem, 3vw, 2.5rem)' }}>
             {SUBSECTIONS.map((sub) => (
               <StaggerItem
                 key={sub.title}
                 variants={itemVariants}
-                className="relative p-8 lg:p-10 flex flex-col gap-5 group border border-[var(--rule)] hover:border-[rgba(165,0,16,0.5)] transition-all duration-500"
+                className="group relative flex flex-col overflow-hidden"
+                style={{
+                  background: 'var(--panel)',
+                  border: '1px solid rgba(237,232,223,0.08)',
+                  padding: 'clamp(1.75rem, 3.5vw, 2.75rem)',
+                  gap: 'clamp(1rem, 2vw, 1.5rem)',
+                }}
               >
-                {/* Top accent */}
-                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--garnet)] via-[var(--garnet-bright)] to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true" />
-
-                <span
-                  className="font-[family-name:var(--f-mono)] text-[var(--garnet)] block"
-                  style={{ fontSize: '0.7rem', letterSpacing: '0.2em' }}
+                {/* Garnet top accent — always visible */}
+                <div
+                  className="absolute top-0 left-0 right-0 h-[2px]"
+                  style={{ background: 'linear-gradient(90deg, var(--garnet) 0%, var(--garnet-bright) 60%, transparent 100%)' }}
                   aria-hidden="true"
-                >
-                  {sub.num}
-                </span>
+                />
                 <h4
                   className="font-[family-name:var(--f-display)] uppercase text-[var(--warm-white)]"
-                  style={{ fontSize: 'clamp(1.15rem, 2.2vw, 1.6rem)', lineHeight: 1.1, letterSpacing: '0.03em' }}
+                  style={{ fontSize: 'clamp(1rem, 2vw, 1.35rem)', lineHeight: 1.1, letterSpacing: '0.04em', fontWeight: 700 }}
                 >
                   {sub.title}
                 </h4>
                 <p
-                  className="font-[family-name:var(--f-body)] text-[var(--warm-white)]"
-                  style={{ fontSize: 'var(--size-sm)', lineHeight: 1.75, fontWeight: 400, opacity: 0.7 }}
+                  className="font-[family-name:var(--f-body)] text-[var(--stone)]"
+                  style={{ fontSize: 'var(--size-base)', lineHeight: 1.8, fontWeight: 400 }}
                 >
                   {sub.desc}
                 </p>

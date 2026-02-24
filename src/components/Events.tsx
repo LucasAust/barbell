@@ -37,7 +37,7 @@ export default function Events({ upcoming, archived }: EventsProps) {
   const regular = upcoming.filter((e) => !e.featured)
 
   return (
-    <section id="events" aria-labelledby="events-heading">
+    <section id="events" aria-labelledby="events-heading" className="bg-[var(--panel)]">
       <div className="wrap">
         {/* Section header */}
         <div className="section-header">
@@ -48,8 +48,8 @@ export default function Events({ upcoming, archived }: EventsProps) {
         {/* Intro text */}
         <FadeUp delay={0.08}>
           <p
-            className="font-[family-name:var(--f-body)] text-[var(--stone)] mb-10 max-w-[58ch]"
-            style={{ fontSize: 'var(--size-md)', lineHeight: 1.7, fontWeight: 400 }}
+            className="font-[family-name:var(--f-body)] text-[var(--stone)] mb-12 max-w-[58ch]"
+            style={{ fontSize: 'var(--size-md)', lineHeight: 1.8, fontWeight: 400 }}
           >
             Outside of athletics and the gym, we are all hard-working and dedicated students who are trying to further our education. We don&apos;t always do events related to the gym &mdash; sometimes it&apos;s about setting up something fun with friends.
           </p>
@@ -57,7 +57,7 @@ export default function Events({ upcoming, archived }: EventsProps) {
 
         {/* Event types — badge row */}
         <FadeUp delay={0.14}>
-          <div className="flex flex-wrap gap-3 mb-14">
+          <div className="flex flex-wrap gap-3 mb-16">
             {['Protein Bar Tastings', 'Game Nights', 'Fundraisers', 'Mental Health & Wellness'].map((tag) => (
               <span key={tag} className="badge badge-social">{tag}</span>
             ))}
@@ -75,7 +75,7 @@ export default function Events({ upcoming, archived }: EventsProps) {
             {/* Featured — large cards */}
             {featured.length > 0 && (
               <Stagger
-                className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8"
+                className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10"
               >
                 {featured.map((event) => (
                   <StaggerItem key={event._id} variants={itemVariants}>
@@ -155,7 +155,7 @@ export default function Events({ upcoming, archived }: EventsProps) {
 function EventCard({ event }: { event: Event }) {
   return (
     <article
-      className="p-8 lg:p-12 flex flex-col gap-5 group border border-[var(--rule)] hover:border-[rgba(165,0,16,0.5)] transition-all duration-500 relative"
+      className="flex flex-col gap-6 group glass-card glass-card-garnet p-10 lg:p-14 overflow-hidden"
       aria-label={event.title}
     >
       <div className="flex items-start justify-between gap-4">
@@ -185,7 +185,7 @@ function EventCard({ event }: { event: Event }) {
           href={event.registrationLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="t-tag text-[var(--garnet)] hover:text-[var(--warm-white)] transition-colors mt-auto"
+          className="t-tag text-[var(--garnet-text)] hover:text-[var(--warm-white)] transition-colors mt-auto"
           data-cursor="hover"
         >
           Register →
@@ -245,7 +245,7 @@ function DateBlock({ date, large }: { date: string; large?: boolean }) {
       style={{ minWidth: large ? '68px' : '52px', padding: large ? '10px 14px' : '8px 10px' }}
       aria-label={formatDate(date)}
     >
-      <span className="font-[family-name:var(--f-mono)] text-[var(--garnet)]" style={{ fontSize: '0.66rem', letterSpacing: '0.12em', fontWeight: 600 }}>
+      <span className="font-[family-name:var(--f-mono)] text-[var(--garnet-text)]" style={{ fontSize: '0.66rem', letterSpacing: '0.12em', fontWeight: 600 }}>
         {formatMonth(date)}
       </span>
       <span

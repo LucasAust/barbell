@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 /* ════════════════════════════════════════════════════════════════════════
@@ -10,6 +10,7 @@
   --garnet:          #73000A;
   --garnet-mid:      #8B000D;
   --garnet-bright:   #A50010;
+  --garnet-text:     #D4001A;
   --black:           #080808;
   --off-black:       #111111;
   --ink:             #0D0D0D;
@@ -19,13 +20,13 @@
   --dust:            #7A746D;
   --panel:           #121214;
   --panel-raised:    #19191C;
-  --rule:            rgba(237,232,223,0.14);
+  --rule:            rgba(237,232,223,0.16);
   --muted:           #C7C0B8;
 
-  /* Type — mixing extreme contrast: display vs. body */
+  /* Type */
   --f-display:       'Orbitron', sans-serif;
-  --f-body:          'Space Grotesk', sans-serif;
-  --f-mono:          'Space Grotesk', sans-serif;
+  --f-body:          'Inter', sans-serif;
+  --f-mono:          'Inter', sans-serif;
 
   /* Fluid type scale  */
   --size-tag:        clamp(0.82rem, 1.1vw,  0.98rem);
@@ -40,7 +41,8 @@
 
   /* Spacing */
   --gap:             clamp(1.5rem, 4vw, 3.5rem);
-  --section-pad:     clamp(6rem, 11vw, 10rem);
+  --section-pad:     clamp(7rem, 12vw, 11rem);
+  --subsection-gap:  clamp(5rem, 9vw, 8rem);
 
   /* Motion — obsessive */
   --spring:          cubic-bezier(0.16, 1, 0.3, 1);
@@ -63,6 +65,7 @@
   --font-mono: var(--f-mono);
 }
 
+/* ── Ring spin keyframes ────────────────────────────────────────────── */
 /* ── Reset ─────────────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -250,6 +253,69 @@ body::after {
   transition: clip-path 1s var(--out-quint);
 }
 
+/* ── Panel card helpers ─────────────────────────────────────────────── */
+.panel-card {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--t-mid) var(--spring);
+}
+.panel-card:hover { border-color: rgba(165,0,16,0.45); }
+.panel-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--garnet), var(--garnet-bright), transparent);
+  opacity: 0;
+  transition: opacity var(--t-mid) var(--spring);
+}
+.panel-card:hover::before { opacity: 0.7; }
+
+/* ── Glassmorphism card ────────────────────────────────────────────── */
+.glass-card {
+  position: relative;
+  background: rgba(237, 232, 223, 0.03);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(237, 232, 223, 0.09);
+  box-shadow:
+    inset 0 1px 0 rgba(237, 232, 223, 0.07),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+    0 24px 64px rgba(0, 0, 0, 0.55),
+    0 4px 16px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  transition:
+    border-color var(--t-mid) var(--spring),
+    box-shadow var(--t-mid) var(--spring),
+    transform var(--t-mid) var(--spring);
+}
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(237,232,223,0.18) 40%, rgba(237,232,223,0.07) 70%, transparent);
+}
+.glass-card:hover {
+  border-color: rgba(165, 0, 16, 0.4);
+  box-shadow:
+    inset 0 1px 0 rgba(237, 232, 223, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+    0 32px 80px rgba(0, 0, 0, 0.6),
+    0 4px 24px rgba(165, 0, 16, 0.12);
+  transform: translateY(-2px);
+}
+.glass-card-garnet::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--garnet-text), var(--garnet-bright), transparent);
+  opacity: 0.8;
+}
+
 /* ── Section header ────────────────────────────────────────────────── */
 .section-header {
   display: flex;
@@ -266,7 +332,7 @@ body::after {
   font-family: var(--f-mono);
   font-size: var(--size-tag);
   letter-spacing: 0.2em;
-  color: var(--garnet);
+  color: var(--garnet-text);
   text-transform: uppercase;
 }
 

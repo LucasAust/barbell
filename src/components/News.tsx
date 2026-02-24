@@ -10,7 +10,7 @@ interface NewsProps {
 }
 
 const CATEGORY_STYLES: Record<string, { dot: string; text: string }> = {
-  announcement: { dot: 'bg-[var(--garnet)]', text: 'text-[var(--garnet)]' },
+  announcement: { dot: 'bg-[var(--garnet-text)]', text: 'text-[var(--garnet-text)]' },
   result: { dot: 'bg-[#6EC88B]', text: 'text-[#6EC88B]' },
   news: { dot: 'bg-[#C8A96E]', text: 'text-[#C8A96E]' },
   update: { dot: 'bg-[var(--muted)]', text: 'text-[var(--muted)]' },
@@ -54,7 +54,7 @@ export default function News({ updates }: NewsProps) {
 
         {/* Pinned — full-width featured card */}
         {pinned.length > 0 && (
-          <div className="mb-8">
+          <div className="mb-6">
             {pinned.map((u, i) => (
               <motion.div
                 key={u._id}
@@ -71,7 +71,7 @@ export default function News({ updates }: NewsProps) {
 
         {/* Grid */}
         {!isEmpty ? (
-          <Stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {rest.map((update) => (
               <StaggerItem key={update._id} variants={itemVariants}>
                 <UpdateCard update={update} />
@@ -84,7 +84,7 @@ export default function News({ updates }: NewsProps) {
               <p className="font-[family-name:var(--f-display)] text-[var(--garnet)] uppercase mb-4" style={{ fontSize: 'clamp(1.2rem, 2.4vw, 1.9rem)', letterSpacing: '0.08em', lineHeight: 1 }}>
                 No News Yet
               </p>
-              <p className="font-[family-name:var(--f-body)] text-[rgba(237,232,223,0.86)]" style={{ fontSize: 'clamp(1.08rem, 1.8vw, 1.3rem)', lineHeight: 1.75, fontWeight: 500, maxWidth: '58ch' }}>
+              <p className="font-[family-name:var(--f-body)] text-[rgba(237,232,223,0.86)]" style={{ fontSize: 'clamp(1.08rem, 1.8vw, 1.3rem)', lineHeight: 1.75, fontWeight: 400, maxWidth: '58ch' }}>
                 This section is live and will populate automatically when updates are added.
               </p>
             </div>
@@ -102,9 +102,12 @@ function UpdateCard({ update, pinned }: { update: Update; pinned?: boolean }) {
 
   return (
     <article
-      className={`p-7 flex flex-col gap-4 transition-all duration-500 h-full border ${pinned ? 'border-[rgba(165,0,16,0.45)]' : 'border-[var(--rule)] hover:border-[rgba(165,0,16,0.5)]'}`}
+      className={`group relative flex flex-col gap-5 transition-all duration-500 h-full glass-card overflow-hidden p-9 lg:p-10 ${pinned ? 'glass-card-garnet' : ''}`}
       aria-label={update.title}
     >
+      {!pinned && (
+        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-[var(--garnet-text)] via-[var(--garnet-bright)] to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-500" aria-hidden="true" />
+      )}
       {/* Meta */}
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2">
@@ -128,14 +131,14 @@ function UpdateCard({ update, pinned }: { update: Update; pinned?: boolean }) {
       {body && (
         <p
           className="font-[family-name:var(--f-body)] text-[var(--muted)]"
-          style={{ fontSize: '0.98rem', lineHeight: 1.65, fontWeight: 500 }}
+          style={{ fontSize: '0.98rem', lineHeight: 1.65, fontWeight: 400 }}
         >
           {body}{body.length >= 179 ? '…' : ''}
         </p>
       )}
 
       {pinned && (
-        <p className="t-tag text-[var(--garnet)] mt-auto" aria-label="Pinned post">
+        <p className="t-tag text-[var(--garnet-text)] mt-auto" aria-label="Pinned post">
           — Pinned
         </p>
       )}

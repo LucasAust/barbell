@@ -55,10 +55,11 @@ const containerVariants: Variants = {
 interface StaggerProps {
   children: ReactNode
   className?: string
+  style?: React.CSSProperties
   once?: boolean
 }
 
-export function Stagger({ children, className, once = true }: StaggerProps) {
+export function Stagger({ children, className, style, once = true }: StaggerProps) {
   const ref = useRef(null)
   const inView = useInView(ref, { once, margin: '-8% 0px' })
 
@@ -66,6 +67,7 @@ export function Stagger({ children, className, once = true }: StaggerProps) {
     <motion.div
       ref={ref}
       className={className}
+      style={style}
       variants={containerVariants}
       initial="hidden"
       animate={inView ? 'visible' : 'hidden'}

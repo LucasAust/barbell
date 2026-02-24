@@ -95,7 +95,7 @@ export default function Footer({ instagramHandle, email, joinLink }: FooterProps
                   <Link
                     href={item.href}
                     className="font-[family-name:var(--f-body)] text-[var(--muted)] hover:text-[var(--warm-white)] transition-colors duration-200"
-                    style={{ fontSize: '0.93rem', fontWeight: 500 }}
+                    style={{ fontSize: '0.93rem', fontWeight: 400 }}
                     data-cursor="hover"
                   >
                     {item.label}
@@ -118,7 +118,7 @@ export default function Footer({ instagramHandle, email, joinLink }: FooterProps
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-[family-name:var(--f-body)] text-[var(--muted)] hover:text-[var(--warm-white)] transition-colors duration-200"
-                  style={{ fontSize: '0.93rem', fontWeight: 500 }}
+                  style={{ fontSize: '0.93rem', fontWeight: 400 }}
                   aria-label={`Instagram @${instagramHandle}`}
                   data-cursor="hover"
                 >
@@ -129,7 +129,7 @@ export default function Footer({ instagramHandle, email, joinLink }: FooterProps
                 <a
                   href={`mailto:${email}`}
                   className="font-[family-name:var(--f-body)] text-[var(--muted)] hover:text-[var(--warm-white)] transition-colors duration-200"
-                  style={{ fontSize: '0.93rem', fontWeight: 500 }}
+                  style={{ fontSize: '0.93rem', fontWeight: 400 }}
                   data-cursor="hover"
                 >
                   {email}
@@ -149,7 +149,7 @@ export default function Footer({ instagramHandle, email, joinLink }: FooterProps
                 'Columbia, SC',
                 'University of South Carolina',
               ].map((line) => (
-                <p key={line} className="font-[family-name:var(--f-body)] text-[var(--muted)]" style={{ fontSize: '0.93rem', fontWeight: 500 }}>
+                <p key={line} className="font-[family-name:var(--f-body)] text-[var(--muted)]" style={{ fontSize: '0.93rem', fontWeight: 400 }}>
                   {line}
                 </p>
               ))}

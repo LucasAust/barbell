@@ -57,7 +57,7 @@ export default function PRBoard({ records }: PRBoardProps) {
         {/* Table */}
         <FadeUp delay={0.15}>
           <div
-            className="overflow-x-auto"
+            className="glass-card overflow-x-auto"
             tabIndex={0}
             aria-label="PR board table"
           >
@@ -67,8 +67,8 @@ export default function PRBoard({ records }: PRBoardProps) {
                   {COLS.map((col) => (
                     <th
                       key={col}
-                      className="font-[family-name:var(--f-body)] text-[rgba(222,215,205,0.86)] px-4 py-4 whitespace-nowrap uppercase"
-                      style={{ fontSize: '1rem', letterSpacing: '0.08em', fontWeight: 600 }}
+                      className="font-[family-name:var(--f-body)] text-[var(--stone)] px-6 py-5 whitespace-nowrap uppercase"
+                      style={{ fontSize: '0.78rem', letterSpacing: '0.12em', fontWeight: 700 }}
                       scope="col"
                     >
                       {col}
@@ -77,33 +77,33 @@ export default function PRBoard({ records }: PRBoardProps) {
                 </tr>
               </thead>
               <tbody>
-                {!isEmpty && filtered.map((r, i) => (
+                  {!isEmpty && filtered.map((r, i) => (
                   <tr
                     key={r._id}
-                    className={`border-b border-[rgba(196,189,180,0.14)] hover:bg-[rgba(255,255,255,0.03)] transition-colors duration-200 ${
-                      i === 0 && division !== 'all' ? 'ring-1 ring-inset ring-[rgba(165,0,16,0.65)]' : ''
+                    className={`border-b border-[rgba(196,189,180,0.1)] hover:bg-[rgba(255,255,255,0.03)] transition-colors duration-200 ${
+                      i === 0 && division !== 'all' ? 'ring-1 ring-inset ring-[rgba(212,0,26,0.4)]' : ''
                     }`}
                   >
-                    <td className="px-4 py-4 font-[family-name:var(--f-display)] uppercase text-[rgba(237,232,223,0.95)] whitespace-nowrap" style={{ fontSize: '1rem', letterSpacing: '0.02em' }}>
+                    <td className="px-6 py-5 font-[family-name:var(--f-display)] uppercase text-[rgba(237,232,223,0.95)] whitespace-nowrap" style={{ fontSize: '1rem', letterSpacing: '0.02em' }}>
                       {i === 0 && (
-                        <span className="inline-block mr-2 text-[var(--garnet)]" aria-label="Top lifter">#1 </span>
+                        <span className="inline-block mr-2 text-[var(--garnet-text)]" aria-label="Top lifter">#1 </span>
                       )}
                       {r.lifterName}
                     </td>
-                    <td className="px-4 py-4 t-tag text-[rgba(210,203,193,0.85)]">
+                    <td className="px-6 py-5 t-tag text-[rgba(210,203,193,0.85)]">
                       {r.sex === 'M' ? 'Men' : r.sex === 'W' ? 'Women' : '—'}
                     </td>
-                    <td className="px-4 py-4 t-tag text-[rgba(210,203,193,0.85)]">{r.weightClass || '—'}</td>
+                    <td className="px-6 py-5 t-tag text-[rgba(210,203,193,0.85)]">{r.weightClass || '—'}</td>
                     <Kg val={r.squat} />
                     <Kg val={r.bench} />
                     <Kg val={r.deadlift} />
-                    <td className="px-4 py-4 font-[family-name:var(--f-display)] text-[#C8A96E] whitespace-nowrap" style={{ fontSize: '1rem' }}>
+                    <td className="px-6 py-5 font-[family-name:var(--f-display)] text-[#C8A96E] whitespace-nowrap" style={{ fontSize: '1rem' }}>
                       {r.total ?? '—'}
                     </td>
-                    <td className="px-4 py-4 font-[family-name:var(--f-mono)] text-[rgba(237,232,223,0.95)]" style={{ fontSize: '0.9rem' }}>
+                    <td className="px-6 py-5 font-[family-name:var(--f-mono)] text-[rgba(237,232,223,0.95)]" style={{ fontSize: '0.9rem' }}>
                       {r.dots ? r.dots.toFixed(1) : '—'}
                     </td>
-                    <td className="px-4 py-4 text-[rgba(199,192,184,0.85)] max-w-[180px] truncate font-[family-name:var(--f-body)]" style={{ fontSize: '0.88rem', fontWeight: 500 }} title={r.competition}>
+                    <td className="px-6 py-5 text-[rgba(199,192,184,0.85)] max-w-[180px] truncate font-[family-name:var(--f-body)]" style={{ fontSize: '0.88rem', fontWeight: 400 }} title={r.competition}>
                       {r.competition || '—'}
                     </td>
                   </tr>
@@ -115,7 +115,7 @@ export default function PRBoard({ records }: PRBoardProps) {
                       <p className="font-[family-name:var(--f-body)] text-[var(--garnet)] uppercase mb-4" style={{ fontSize: 'clamp(1.35rem, 2.4vw, 1.95rem)', letterSpacing: '0.06em', lineHeight: 1.05, fontWeight: 700 }}>
                         PR Board Is Active
                       </p>
-                      <p className="font-[family-name:var(--f-body)] text-[rgba(232,226,216,0.96)]" style={{ fontSize: 'clamp(1.22rem, 2vw, 1.5rem)', lineHeight: 1.75, fontWeight: 500 }}>
+                      <p className="font-[family-name:var(--f-body)] text-[rgba(232,226,216,0.96)]" style={{ fontSize: 'clamp(1.22rem, 2vw, 1.5rem)', lineHeight: 1.75, fontWeight: 400 }}>
                         Records will appear here once lifter PRs are published.
                       </p>
                     </td>
@@ -138,7 +138,7 @@ export default function PRBoard({ records }: PRBoardProps) {
 
 function Kg({ val }: { val?: number }) {
   return (
-    <td className="px-4 py-4 font-[family-name:var(--f-mono)] text-[rgba(237,232,223,0.92)] whitespace-nowrap" style={{ fontSize: '0.9rem' }}>
+    <td className="px-6 py-5 font-[family-name:var(--f-mono)] text-[rgba(237,232,223,0.92)] whitespace-nowrap" style={{ fontSize: '0.9rem' }}>
       {val ? val : <span className="text-[rgba(199,192,184,0.82)]">—</span>}
     </td>
   )

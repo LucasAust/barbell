@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import TextReveal from './TextReveal'
 import Magnetic from './Magnetic'
+import HeroRings from './HeroRings'
 
 interface HeroProps {
   tagline?: string
@@ -16,17 +17,6 @@ const TICKER_ITEMS = [
 ]
 
 /* Particles at different z-depths: size / opacity / position varies for depth illusion */
-const PARTICLES = Array.from({ length: 22 }, (_, i) => ({
-  id: i,
-  size: 2 + (i % 4) * 2.5,
-  x: 5 + (i * 5.3) % 90,
-  y: 8 + (i * 7.1) % 80,
-  color: i % 3 === 0 ? 'rgba(165,0,16,0.95)' : i % 3 === 1 ? 'rgba(237,232,223,0.7)' : 'rgba(200,100,60,0.6)',
-  blur: i % 3 === 2 ? 2 : 0,
-  dur: 2.4 + (i % 6) * 0.5,
-  delay: i * 0.18,
-  yAmt: 14 + (i % 5) * 9,
-}))
 
 export default function Hero({ tagline = 'Strength. Community. Growth. Represent USC.' }: HeroProps) {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -56,31 +46,7 @@ export default function Hero({ tagline = 'Strength. Community. Growth. Represent
           transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
         />
 
-        {/* Secondary cool bloom — slight orange/amber for contrast */}
-        <motion.div
-          className="absolute pointer-events-none"
-          style={{
-            width: '50%', height: '50%',
-            top: '10%', right: '-5%',
-            background: 'radial-gradient(ellipse, rgba(180,40,10,0.18) 0%, transparent 70%)',
-            filter: 'blur(60px)',
-          }}
-          animate={{ x: [0, -30, 0], y: [0, 18, 0], opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 13, repeat: Infinity, ease: 'easeInOut' }}
-        />
 
-        {/* Third glow — deep purple undertone, bottom-left */}
-        <motion.div
-          className="absolute pointer-events-none"
-          style={{
-            width: '40%', height: '40%',
-            bottom: '10%', left: '-8%',
-            background: 'radial-gradient(ellipse, rgba(80,0,80,0.22) 0%, transparent 70%)',
-            filter: 'blur(55px)',
-          }}
-          animate={{ x: [0, 24, 0], y: [0, -16, 0], opacity: [0.4, 0.9, 0.4] }}
-          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-        />
 
         {/* ── Perspective grid floor — animated scroll ───────────── */}
         <div
@@ -124,126 +90,16 @@ export default function Hero({ tagline = 'Strength. Community. Growth. Represent
           transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut', repeatDelay: 6 }}
         />
 
-        {/* ── Scan line ───────────────────────────────────────────── */}
-        <div
-          className="absolute left-0 right-0 pointer-events-none"
-          style={{
-            height: '2px',
-            background: 'linear-gradient(90deg, transparent 0%, rgba(237,232,223,0.25) 20%, rgba(255,255,255,0.55) 50%, rgba(237,232,223,0.25) 80%, transparent 100%)',
-            animation: 'scanLine 8s linear infinite',
-            animationDelay: '2s',
-          }}
-        />
+        {/* ── 3D spinning rings (canvas) ────────────────────────── */}
+        <HeroRings />
 
-        {/* ── 3D Orbital rings ───────────────────────────────────── */}
-        {/* Ring 1 — equatorial, largest */}
-        <div className="absolute inset-0 pointer-events-none" style={{ perspective: '900px', perspectiveOrigin: '50% 42%' }}>
-          <motion.div
-            style={{
-              position: 'absolute',
-              width: '82vw', height: '82vw',
-              top: '50%', left: '50%',
-              marginTop: '-41vw', marginLeft: '-41vw',
-              borderRadius: '50%',
-              border: '1px solid rgba(237,232,223,0.18)',
-              boxShadow: '0 0 0 1px rgba(165,0,16,0.08), inset 0 0 60px rgba(165,0,16,0.06)',
-              rotateX: 72,
-            }}
-            animate={{ rotateZ: 360 }}
-            transition={{ duration: 36, repeat: Infinity, ease: 'linear' }}
-          />
-        </div>
 
-        {/* Ring 2 — tilted, garnet tinted */}
-        <div className="absolute inset-0 pointer-events-none" style={{ perspective: '900px', perspectiveOrigin: '50% 42%' }}>
-          <motion.div
-            style={{
-              position: 'absolute',
-              width: '58vw', height: '58vw',
-              top: '50%', left: '50%',
-              marginTop: '-29vw', marginLeft: '-29vw',
-              borderRadius: '50%',
-              border: '1.5px solid rgba(165,0,16,0.55)',
-              boxShadow: '0 0 20px rgba(165,0,16,0.15)',
-              rotateX: 68,
-              rotateZ: 25,
-            }}
-            animate={{ rotateZ: [25, 385] }}
-            transition={{ duration: 24, repeat: Infinity, ease: 'linear' }}
-          />
-        </div>
 
-        {/* Ring 3 — inner, near-flat, fast */}
-        <div className="absolute inset-0 pointer-events-none" style={{ perspective: '900px', perspectiveOrigin: '50% 42%' }}>
-          <motion.div
-            style={{
-              position: 'absolute',
-              width: '38vw', height: '38vw',
-              top: '50%', left: '50%',
-              marginTop: '-19vw', marginLeft: '-19vw',
-              borderRadius: '50%',
-              border: '1px dashed rgba(237,232,223,0.12)',
-              rotateX: 60,
-              rotateZ: -10,
-            }}
-            animate={{ rotateZ: [-10, -370] }}
-            transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
-          />
-        </div>
 
-        {/* Ring 4 — outer halo, very subtle */}
-        <div className="absolute inset-0 pointer-events-none" style={{ perspective: '900px', perspectiveOrigin: '50% 42%' }}>
-          <motion.div
-            style={{
-              position: 'absolute',
-              width: '108vw', height: '108vw',
-              top: '50%', left: '50%',
-              marginTop: '-54vw', marginLeft: '-54vw',
-              borderRadius: '50%',
-              border: '1px solid rgba(165,0,16,0.18)',
-              rotateX: 78,
-            }}
-            animate={{ rotateZ: 360 }}
-            transition={{ duration: 55, repeat: Infinity, ease: 'linear' }}
-          />
-        </div>
 
-        {/* ── Depth particles ───────────────────────────────────── */}
-        {PARTICLES.map((p) => (
-          <motion.div
-            key={p.id}
-            className="absolute rounded-full pointer-events-none"
-            style={{
-              width: p.size, height: p.size,
-              left: `${p.x}%`, top: `${p.y}%`,
-              background: p.color,
-              filter: p.blur ? `blur(${p.blur}px)` : undefined,
-              boxShadow: `0 0 ${p.size * 4}px ${p.color}`,
-            }}
-            animate={{ y: [0, -p.yAmt, 0], opacity: [0.15, 1, 0.15], scale: [0.7, 1.3, 0.7] }}
-            transition={{ duration: p.dur, repeat: Infinity, ease: 'easeInOut', delay: p.delay }}
-          />
-        ))}
 
-        {/* ── HUD corner brackets ──────────────────────────────── */}
-        {[{t:'8px',l:'8px',bl:0,br:0},{t:'8px',r:'8px',bl:0,br:0},{b:'48px',l:'8px',bl:0,br:0},{b:'48px',r:'8px',bl:0,br:0}].map((pos, i) => (
-          <motion.div
-            key={i}
-            className="absolute pointer-events-none"
-            aria-hidden="true"
-            style={{
-              ...pos,
-              width: 28, height: 28,
-              borderTop:    (i < 2) ? '1.5px solid rgba(165,0,16,0.7)' : 'none',
-              borderBottom: (i >= 2) ? '1.5px solid rgba(165,0,16,0.7)' : 'none',
-              borderLeft:   (i % 2 === 0) ? '1.5px solid rgba(165,0,16,0.7)' : 'none',
-              borderRight:  (i % 2 === 1) ? '1.5px solid rgba(165,0,16,0.7)' : 'none',
-            }}
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: [0.5, 0.9, 0.5], scale: 1 }}
-            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 2.4 + i * 0.15 }}
-          />
-        ))}
+
+
 
         {/* Vignette */}
         <div
@@ -285,8 +141,8 @@ export default function Hero({ tagline = 'Strength. Community. Growth. Represent
             transition={{ duration: 0.6, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="flex items-center gap-3 mb-4"
           >
-            <span className="block h-px w-10 bg-[var(--garnet)]" aria-hidden="true" />
-            <span className="t-tag text-[var(--garnet)]">University of South Carolina</span>
+            <span className="block h-px w-10 bg-[var(--warm-white)]" aria-hidden="true" />
+            <span className="t-tag text-[var(--warm-white)]">University of South Carolina</span>
           </motion.div>
 
           {/* 3D extruded + glitch headline */}
