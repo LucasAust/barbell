@@ -37,7 +37,6 @@ export interface Officer {
   name: string
   role: string
   order: number
-  photo?: SanityImage
   major?: string
   email?: string
   instagram?: string
@@ -57,6 +56,13 @@ export interface PRRecord {
   competition?: string
 }
 
+// Sanity image type (kept for potential future use)
+export type SanityImage = {
+  _type: 'image'
+  asset: { _ref: string; _type: 'reference' }
+  hotspot?: { x: number; y: number; height: number; width: number }
+}
+
 // Minimal portable text block type
 export type PortableTextBlock = {
   _type: 'block'
@@ -64,10 +70,4 @@ export type PortableTextBlock = {
   style?: string
   children: Array<{ _type: 'span'; _key: string; text: string; marks?: string[] }>
   markDefs?: Array<{ _type: string; _key: string; href?: string }>
-}
-
-export type SanityImage = {
-  _type: 'image'
-  asset: { _ref: string; _type: 'reference' }
-  hotspot?: { x: number; y: number; height: number; width: number }
 }

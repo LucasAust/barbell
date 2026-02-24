@@ -25,12 +25,6 @@ export const officer = defineType({
       initialValue: 99,
     }),
     defineField({
-      name: 'photo',
-      title: 'Photo',
-      type: 'image',
-      options: { hotspot: true },
-    }),
-    defineField({
       name: 'major',
       title: 'Major / Year',
       type: 'string',

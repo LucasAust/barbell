@@ -66,7 +66,6 @@ export const OFFICERS_QUERY = groq`
     name,
     role,
     order,
-    photo,
     major,
     email,
     instagram

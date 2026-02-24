@@ -1,9 +1,7 @@
 'use client'
 
-import Image from 'next/image'
 import TextReveal from './TextReveal'
 import { Stagger, StaggerItem, itemVariants } from './MotionUtils'
-import { urlFor } from '@/sanity/lib/image'
 import type { Officer } from '@/sanity/types'
 
 interface OfficersProps {
@@ -49,41 +47,11 @@ export default function Officers({ officers }: OfficersProps) {
 }
 
 function OfficerCard({ officer }: { officer: Officer }) {
-  const photoUrl = officer.photo
-    ? urlFor(officer.photo).width(400).height(500).fit('crop').url()
-    : null
-
   return (
     <article
       className="p-5 flex flex-col gap-3 group border border-[var(--rule)] hover:border-[rgba(165,0,16,0.5)] transition-all duration-500"
       aria-label={`${officer.name}, ${officer.role}`}
     >
-      {/* Photo */}
-      <div
-        className="img-hover w-full aspect-[4/5] overflow-hidden mb-1 relative bg-[#1e1e1e]"
-        aria-hidden={!officer.photo}
-      >
-        {photoUrl ? (
-          <Image
-            src={photoUrl}
-            alt={`${officer.name} — ${officer.role}`}
-            fill
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-            className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-            loading="lazy"
-          />
-        ) : (
-          <div
-            className="absolute inset-0 flex items-center justify-center font-[family-name:var(--f-display)] text-[var(--muted)]"
-            style={{ fontSize: '4rem' }}
-            aria-hidden="true"
-          >
-            GBC
-          </div>
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--garnet)]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
-      </div>
-
       {/* Name & role */}
       <div>
         <h3
