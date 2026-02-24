@@ -56,7 +56,7 @@ function OfficerRow({ officer, index }: { officer: Officer; index: number }) {
       className="group relative border-b border-[var(--rule)] overflow-hidden cursor-default"
       style={{
         display: 'grid',
-        gridTemplateColumns: '2.5rem 1fr 22ch',
+        gridTemplateColumns: '2.5rem 1fr',
         alignItems: 'center',
         gap: '0 clamp(1rem, 3vw, 2.5rem)',
         padding: 'clamp(1.35rem, 2.5vw, 1.9rem) 0.5rem clamp(1.35rem, 2.5vw, 1.9rem) 1.25rem',
@@ -78,23 +78,21 @@ function OfficerRow({ officer, index }: { officer: Officer; index: number }) {
         {String(index + 1).padStart(2, '0')}
       </span>
 
-      {/* Name */}
-      <div className="flex-1 min-w-0">
+      {/* Name + Role */}
+      <div className="min-w-0 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-4">
         <h3
           className="font-[family-name:var(--f-display)] uppercase text-[var(--warm-white)]"
           style={{ fontSize: 'clamp(1.05rem, 2.6vw, 1.55rem)', letterSpacing: '0.02em', lineHeight: 1 }}
         >
           {officer.name}
         </h3>
+        <p
+          className="t-tag text-[var(--garnet-text)] shrink-0"
+          style={{ fontVariantNumeric: 'tabular-nums' }}
+        >
+          {officer.role}
+        </p>
       </div>
-
-      {/* Role — always in the same column because of parent grid */}
-      <p
-        className="t-tag text-[var(--garnet-text)]"
-        style={{ fontVariantNumeric: 'tabular-nums' }}
-      >
-        {officer.role}
-      </p>
 
       {/* Optional links */}
       {(officer.email || officer.instagram) && (
