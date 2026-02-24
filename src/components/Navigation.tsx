@@ -29,7 +29,7 @@ export default function Navigation() {
   return (
     <motion.header
       role="banner"
-      style={{ zIndex: 'var(--z-nav)' } as React.CSSProperties}
+      style={{ zIndex: 'var(--z-nav)', paddingTop: 'env(safe-area-inset-top)' } as React.CSSProperties}
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
@@ -39,8 +39,6 @@ export default function Navigation() {
           : 'bg-[linear-gradient(to_bottom,rgba(8,8,8,0.7),transparent)]'
       }`}
     >
-      {/* Fills the safe-area / status-bar gap on mobile so nothing bleeds through */}
-      <div className="absolute inset-x-0 bottom-full h-16 bg-[var(--black)]" aria-hidden="true" />
       <div className="wrap flex items-center justify-between h-[72px] lg:h-[84px]">
         {/* Logo */}
         <Magnetic intensity={0.3}>
@@ -130,7 +128,7 @@ export default function Navigation() {
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="md:hidden bg-[var(--black)]/98 border-b border-[var(--rule)] backdrop-blur-xl"
           >
-            <div className="wrap pt-8 pb-12 flex flex-col gap-6">
+            <div className="wrap pt-8 pb-16 flex flex-col gap-6">
               {NAV_ITEMS.map((item) => (
                 <Link
                   key={item.href}
