@@ -40,7 +40,8 @@ export default function Navigation() {
         return
       }
 
-      const nextTop = Math.max(0, vv.offsetTop || 0, vv.pageTop - window.scrollY)
+      const rawTop = vv.offsetTop || 0
+      const nextTop = Math.min(160, Math.max(0, rawTop))
       setViewportTop((prev) => (prev === nextTop ? prev : nextTop))
     }
 
