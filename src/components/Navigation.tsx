@@ -61,11 +61,11 @@ export default function Navigation() {
       {/* ── Main header bar ── */}
       <motion.header
         role="banner"
-        style={{ zIndex: 500, paddingTop: 'env(safe-area-inset-top)' } as React.CSSProperties}
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-        className={`fixed top-0 left-0 right-0 transition-all duration-500 ${
+        style={{ zIndex: 500 } as React.CSSProperties}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+        className={`sticky top-0 left-0 right-0 transition-all duration-500 ${
           scrolled
             ? 'bg-[#080808] border-b border-[var(--rule)]'
             : 'bg-[#080808] md:bg-[linear-gradient(to_bottom,rgba(8,8,8,0.7),transparent)] md:border-none'
@@ -147,11 +147,8 @@ export default function Navigation() {
             className="md:hidden fixed inset-0 flex flex-col"
             style={{ backgroundColor: '#080808', zIndex: 501 } as React.CSSProperties}
           >
-            {/* Top bar — mirrors header + safe area */}
-            <div
-              className="wrap flex items-center justify-between shrink-0"
-              style={{ paddingTop: 'env(safe-area-inset-top)' }}
-            >
+            {/* Top bar — mirrors header */}
+            <div className="wrap flex items-center justify-between shrink-0">
               <div className="flex items-center h-[72px]">
                 <span
                   className="font-[family-name:var(--f-display)] text-[var(--warm-white)] leading-none"

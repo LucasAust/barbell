@@ -17,7 +17,6 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: "#080808",
   colorScheme: "dark",
-  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -28,24 +27,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Hard-coded theme-color fallback — belt AND suspenders for iOS 26 liquid glass */}
         <meta name="theme-color" content="#080808" />
-        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#080808" />
-        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#080808" />
       </head>
       <body className="antialiased">
-        {/* Nuclear option: permanent solid black strip at top — covers status bar,
-            URL bar, safe area, whatever iOS puts there. Always. No exceptions. */}
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: '120px',
-          background: '#080808',
-          zIndex: 9998,
-          pointerEvents: 'none',
-        }} aria-hidden="true" />
         <ClientProviders>{children}</ClientProviders>
       </body>
     </html>
