@@ -29,7 +29,7 @@ export default function Hero({ tagline = 'Strength. Community. Growth. Represent
     <section
       id="hero"
       ref={containerRef}
-      className="relative h-screen overflow-hidden"
+      className="relative h-screen overflow-hidden -mt-[72px] md:mt-0"
       aria-label="Hero section"
     >
       {/* ── 3D Background ─────────────────────────────────────────── */}
