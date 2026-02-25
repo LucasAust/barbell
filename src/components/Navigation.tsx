@@ -42,22 +42,16 @@ export default function Navigation() {
       <div
         className="fixed top-0 left-0 right-0 z-[500]"
       >
-        <div
-          className="md:hidden absolute left-0 right-0 bottom-full h-[128px] pointer-events-none"
-          style={{ backgroundColor: '#080808' }}
-          aria-hidden="true"
-        />
-
         {/* ── Main header bar ── */}
         <motion.header
           role="banner"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-          className={`relative z-10 transition-all duration-500 ${
+          className={`relative z-10 transition-all duration-500 border-b border-[rgba(237,232,223,0.14)] bg-[rgba(8,8,8,0.46)] backdrop-blur-xl md:backdrop-blur-none ${
             scrolled
-              ? 'bg-[#080808] border-b border-[var(--rule)]'
-              : 'bg-[#080808] md:bg-[linear-gradient(to_bottom,rgba(8,8,8,0.7),transparent)] md:border-none'
+              ? 'md:bg-[#080808] md:border-b md:border-[var(--rule)]'
+              : 'md:bg-[linear-gradient(to_bottom,rgba(8,8,8,0.7),transparent)] md:border-none'
           }`}
           style={{ paddingTop: 'env(safe-area-inset-top)' }}
         >
