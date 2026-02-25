@@ -18,9 +18,7 @@ export default function ClientProviders({ children }: { children: React.ReactNod
   }
 
   return (
-    <>
-      <SmoothScroll />
-
+    <SmoothScroll>
       {/* Preloader sits on top; children go behind until done */}
       {!done && <Preloader onDone={() => setDone(true)} />}
 
@@ -33,6 +31,6 @@ export default function ClientProviders({ children }: { children: React.ReactNod
       >
         {children}
       </div>
-    </>
+    </SmoothScroll>
   )
 }

@@ -65,18 +65,12 @@ export default function Navigation() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-        className={`safe-area-top fixed top-0 left-0 right-0 transition-all duration-500 ${
+        className={`sticky top-0 left-0 right-0 transition-all duration-500 ${
           scrolled
             ? 'bg-[#080808] border-b border-[var(--rule)]'
             : 'bg-[#080808] md:bg-[linear-gradient(to_bottom,rgba(8,8,8,0.7),transparent)] md:border-none'
         }`}
       >
-        {/* Bleeds solid black 200px above top:0 — kills any iOS safe-area / URL-bar gap */}
-        <div
-          aria-hidden="true"
-          className="md:hidden absolute left-0 right-0 pointer-events-none"
-          style={{ bottom: '100%', height: '200px', backgroundColor: '#080808' }}
-        />
         <div className="wrap flex items-center justify-between h-[72px] lg:h-[84px]">
           {/* Logo */}
           <Magnetic intensity={0.3}>
