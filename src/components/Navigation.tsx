@@ -68,7 +68,7 @@ export default function Navigation() {
         className={`fixed top-0 left-0 right-0 transition-all duration-500 ${
           scrolled
             ? 'bg-[#080808] border-b border-[var(--rule)]'
-            : 'bg-[linear-gradient(to_bottom,rgba(8,8,8,0.7),transparent)]'
+            : 'bg-[#080808] md:bg-[linear-gradient(to_bottom,rgba(8,8,8,0.7),transparent)] md:border-none'
         }`}
       >
         <div className="wrap flex items-center justify-between h-[72px] lg:h-[84px]">
