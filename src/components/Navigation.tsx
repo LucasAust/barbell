@@ -26,36 +26,6 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
 
-  // Lock body scroll when mobile menu is open so page content
-  // doesn't scroll behind the Safari URL bar chrome
-  useEffect(() => {
-    if (mobileOpen) {
-      const scrollY = window.scrollY
-      document.body.style.position = 'fixed'
-      document.body.style.top = `-${scrollY}px`
-      document.body.style.left = '0'
-      document.body.style.right = '0'
-      document.body.style.overflow = 'hidden'
-    } else {
-      const scrollY = document.body.style.top
-      document.body.style.position = ''
-      document.body.style.top = ''
-      document.body.style.left = ''
-      document.body.style.right = ''
-      document.body.style.overflow = ''
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || '0') * -1)
-      }
-    }
-    return () => {
-      document.body.style.position = ''
-      document.body.style.top = ''
-      document.body.style.left = ''
-      document.body.style.right = ''
-      document.body.style.overflow = ''
-    }
-  }, [mobileOpen])
-
   return (
     <>
       {/* ── Main header bar ── */}
@@ -118,13 +88,13 @@ export default function Navigation() {
             ))}
           </nav>
 
-          {/* Mobile hamburger — hidden when overlay is open (overlay has its own close) */}
-          {!mobileOpen && (
+          {/* Mobile menu toggle */}
+          {!mobileOpen ? (
             <button
               className="md:hidden flex flex-col gap-[5px] p-2"
               onClick={() => setMobileOpen(true)}
               aria-label="Open menu"
-              aria-expanded={false}
+              aria-expanded={mobileOpen}
               aria-controls="mobile-menu"
               data-cursor="hover"
             >
@@ -132,67 +102,54 @@ export default function Navigation() {
               <span className="block h-px w-6 bg-[var(--warm-white)]" />
               <span className="block h-px w-6 bg-[var(--warm-white)]" />
             </button>
+          ) : (
+            <button
+              className="md:hidden flex items-center justify-center h-[72px] px-2 text-[var(--warm-white)]"
+              onClick={() => setMobileOpen(false)}
+              aria-label="Close menu"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-menu"
+              data-cursor="hover"
+            >
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+                <line x1="3" y1="3" x2="19" y2="19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                <line x1="19" y1="3" x2="3" y2="19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+            </button>
           )}
         </div>
-      </motion.header>
-
-      {/* ── Mobile full-screen overlay — z-index ABOVE header so no bleed-through ── */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            id="mobile-menu"
-            key="mobile-nav"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Mobile navigation"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
-            className="md:hidden fixed inset-0 flex flex-col"
-            style={{ backgroundColor: '#080808', zIndex: 501 } as React.CSSProperties}
-          >
-            {/* Top bar — mirrors header */}
-            <div className="wrap flex items-center justify-between shrink-0">
-              <div className="flex items-center h-[72px]">
-                <span
-                  className="font-[family-name:var(--f-display)] text-[var(--warm-white)] leading-none"
-                  style={{ fontSize: 'clamp(1.2rem, 2vw, 1.6rem)', letterSpacing: '0.03em', fontWeight: 700 }}
-                >
-                  GBC
-                </span>
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.nav
+              id="mobile-menu"
+              key="mobile-nav"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Mobile navigation"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'calc(100svh - 72px)', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="md:hidden overflow-hidden border-t border-[var(--rule)] bg-[#080808]"
+            >
+              <div className="wrap h-full flex flex-col justify-center gap-7 pb-16">
+                {NAV_ITEMS.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="font-[family-name:var(--f-display)] text-[var(--warm-white)] hover:text-[var(--garnet)] transition-colors"
+                    style={{ fontSize: 'clamp(2rem, 7vw, 3rem)', lineHeight: 1 }}
+                    data-cursor="hover"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
               </div>
-              <button
-                onClick={() => setMobileOpen(false)}
-                aria-label="Close menu"
-                className="flex items-center justify-center h-[72px] px-2 text-[var(--warm-white)]"
-                data-cursor="hover"
-              >
-                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-                  <line x1="3" y1="3" x2="19" y2="19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                  <line x1="19" y1="3" x2="3" y2="19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                </svg>
-              </button>
-            </div>
-
-            {/* Nav links */}
-            <div className="wrap flex-1 flex flex-col justify-center gap-7 pb-20">
-              {NAV_ITEMS.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="font-[family-name:var(--f-display)] text-[var(--warm-white)] hover:text-[var(--garnet)] transition-colors"
-                  style={{ fontSize: 'clamp(2rem, 7vw, 3rem)', lineHeight: 1 }}
-                  data-cursor="hover"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </motion.nav>
+          )}
+        </AnimatePresence>
+      </motion.header>
     </>
   )
 }
