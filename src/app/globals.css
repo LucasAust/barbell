@@ -75,6 +75,12 @@ html {
   color-scheme: dark;
 }
 
+/* Safe-area padding for fixed header — constant() for iOS <11, env() for iOS 11+ */
+.safe-area-top {
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
+}
+
 body {
   background: var(--black);
   color: var(--warm-white);
