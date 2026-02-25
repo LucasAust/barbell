@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ClientProviders from "@/components/ClientProviders";
+import Navigation from "@/components/Navigation";
 
 export const metadata: Metadata = {
   title: "Gamecock Barbell Club | University of South Carolina",
@@ -26,6 +27,7 @@ export default function RootLayout({
         <meta name="color-scheme" content="dark" />
       </head>
       <body className="antialiased">
+        <Navigation />
         <ClientProviders>{children}</ClientProviders>
       </body>
     </html>

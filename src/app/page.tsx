@@ -17,7 +17,6 @@ import type {
   PRRecord,
 } from '@/sanity/types'
 
-import Navigation from '@/components/Navigation'
 import Hero from '@/components/Hero'
 import About from '@/components/About'
 import Events from '@/components/Events'
@@ -88,8 +87,6 @@ export default async function Home() {
 
   return (
     <>
-      <Navigation />
-
       {/* Skip to main content — accessibility */}
       <a
         href="#about"
