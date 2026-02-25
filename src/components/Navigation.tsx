@@ -58,24 +58,24 @@ export default function Navigation() {
 
   return (
     <>
-      <div
-        className="md:hidden fixed left-0 right-0 top-0 pointer-events-none"
-        style={{ height: '128px', backgroundColor: '#080808', zIndex: 499 }}
-        aria-hidden="true"
-      />
-
       {/* ── Main header bar ── */}
       <motion.header
         role="banner"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-        className={`fixed top-0 left-0 right-0 z-[500] transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-[500] transition-all duration-500 relative ${
           scrolled
             ? 'bg-[#080808] border-b border-[var(--rule)]'
             : 'bg-[#080808] md:bg-[linear-gradient(to_bottom,rgba(8,8,8,0.7),transparent)] md:border-none'
         }`}
       >
+        <div
+          className="md:hidden absolute -top-[128px] left-0 right-0 h-[128px] pointer-events-none"
+          style={{ backgroundColor: '#080808' }}
+          aria-hidden="true"
+        />
+
         <div className="wrap flex items-center justify-between h-[72px] lg:h-[84px]">
           {/* Logo */}
           <Magnetic intensity={0.3}>
