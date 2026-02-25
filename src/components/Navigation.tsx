@@ -61,11 +61,11 @@ export default function Navigation() {
       {/* ── Main header bar ── */}
       <motion.header
         role="banner"
-        style={{ zIndex: 500 } as React.CSSProperties}
+        style={{ zIndex: 500, paddingTop: 'env(safe-area-inset-top)' } as React.CSSProperties}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-        className={`sticky top-0 left-0 right-0 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 transition-all duration-500 ${
           scrolled
             ? 'bg-[#080808] border-b border-[var(--rule)]'
             : 'bg-[#080808] md:bg-[linear-gradient(to_bottom,rgba(8,8,8,0.7),transparent)] md:border-none'
