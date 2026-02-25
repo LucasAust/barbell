@@ -40,6 +40,12 @@ export default function Navigation() {
   return (
     <>
       <div
+        className="md:hidden fixed top-0 left-0 right-0 h-[128px] pointer-events-none z-[499]"
+        style={{ backgroundColor: '#080808' }}
+        aria-hidden="true"
+      />
+
+      <div
         className="fixed top-0 left-0 right-0 z-[500]"
       >
         {/* ── Main header bar ── */}
