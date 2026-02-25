@@ -16,7 +16,6 @@ const NAV_ITEMS = [
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [viewportTop, setViewportTop] = useState(0)
 
   const handleScroll = useCallback(() => {
     setScrolled(window.scrollY > 60)
@@ -26,45 +25,6 @@ export default function Navigation() {
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
-
-  useEffect(() => {
-    const vv = window.visualViewport
-    if (!vv) return
-
-    let frameId = 0
-
-    const updateViewportTop = () => {
-      const isMobile = window.innerWidth < 768
-      if (!isMobile) {
-        setViewportTop(0)
-        return
-      }
-
-      const offsetTop = vv.offsetTop || 0
-      const pageTopDelta = vv.pageTop - window.scrollY
-      const nextTop = Math.max(0, offsetTop, pageTopDelta)
-
-      setViewportTop((prev) => (prev === nextTop ? prev : nextTop))
-    }
-
-    const tick = () => {
-      updateViewportTop()
-      frameId = window.requestAnimationFrame(tick)
-    }
-
-    updateViewportTop()
-    vv.addEventListener('resize', updateViewportTop)
-    vv.addEventListener('scroll', updateViewportTop)
-    window.addEventListener('resize', updateViewportTop)
-    frameId = window.requestAnimationFrame(tick)
-
-    return () => {
-      vv.removeEventListener('resize', updateViewportTop)
-      vv.removeEventListener('scroll', updateViewportTop)
-      window.removeEventListener('resize', updateViewportTop)
-      window.cancelAnimationFrame(frameId)
-    }
-  }, [])
 
   // Lock body scroll when mobile menu is open so page content
   // doesn't scroll behind the Safari URL bar chrome
@@ -104,12 +64,11 @@ export default function Navigation() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-        className={`fixed top-0 left-0 right-0 z-[500] transition-all duration-500 relative ${
+        className={`sticky top-0 z-[500] transition-all duration-500 relative ${
           scrolled
             ? 'bg-[#080808] border-b border-[var(--rule)]'
             : 'bg-[#080808] md:bg-[linear-gradient(to_bottom,rgba(8,8,8,0.7),transparent)] md:border-none'
         }`}
-        style={{ transform: `translateY(${viewportTop}px)` }}
       >
         <div
           className="md:hidden absolute -top-[128px] left-0 right-0 h-[128px] pointer-events-none"
