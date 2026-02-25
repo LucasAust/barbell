@@ -34,18 +34,12 @@ export default function Navigation() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-        className={`sticky top-0 z-[500] transition-all duration-500 relative ${
+        className={`relative z-[500] transition-all duration-500 ${
           scrolled
             ? 'bg-[#080808] border-b border-[var(--rule)]'
             : 'bg-[#080808] md:bg-[linear-gradient(to_bottom,rgba(8,8,8,0.7),transparent)] md:border-none'
         }`}
       >
-        <div
-          className="md:hidden absolute -top-[128px] left-0 right-0 h-[128px] pointer-events-none"
-          style={{ backgroundColor: '#080808' }}
-          aria-hidden="true"
-        />
-
         <div className="wrap flex items-center justify-between h-[72px] lg:h-[84px]">
           {/* Logo */}
           <Magnetic intensity={0.3}>
@@ -127,12 +121,12 @@ export default function Navigation() {
               aria-modal="true"
               aria-label="Mobile navigation"
               initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'calc(100svh - 72px)', opacity: 1 }}
+              animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.2 }}
               className="md:hidden overflow-hidden border-t border-[var(--rule)] bg-[#080808]"
             >
-              <div className="wrap h-full flex flex-col justify-center gap-7 pb-16">
+              <div className="wrap flex flex-col gap-7 py-10 pb-16">
                 {NAV_ITEMS.map((item) => (
                   <Link
                     key={item.href}
