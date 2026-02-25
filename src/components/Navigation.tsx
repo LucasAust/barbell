@@ -130,11 +130,12 @@ export default function Navigation() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden fixed inset-0 flex flex-col"
+            className="md:hidden fixed left-0 right-0 bottom-0 flex flex-col"
             style={{
+              top: '-200px',
+              paddingTop: 'calc(200px + 72px + env(safe-area-inset-top))',
               backgroundColor: '#080808',
               zIndex: 'calc(var(--z-nav) - 1)',
-              paddingTop: 'calc(72px + env(safe-area-inset-top))',
             } as React.CSSProperties}
           >
             {/* Nav links — vertically centred in remaining space */}
