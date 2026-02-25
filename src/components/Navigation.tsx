@@ -16,6 +16,7 @@ const NAV_ITEMS = [
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [viewportTop, setViewportTop] = useState(0)
 
   const handleScroll = useCallback(() => {
     setScrolled(window.scrollY > 60)
@@ -25,6 +26,27 @@ export default function Navigation() {
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
+
+  useEffect(() => {
+    const vv = window.visualViewport
+    if (!vv) return
+
+    const updateViewportTop = () => {
+      const isMobile = window.innerWidth < 768
+      setViewportTop(isMobile ? Math.max(0, vv.offsetTop || 0) : 0)
+    }
+
+    updateViewportTop()
+    vv.addEventListener('resize', updateViewportTop)
+    vv.addEventListener('scroll', updateViewportTop)
+    window.addEventListener('resize', updateViewportTop)
+
+    return () => {
+      vv.removeEventListener('resize', updateViewportTop)
+      vv.removeEventListener('scroll', updateViewportTop)
+      window.removeEventListener('resize', updateViewportTop)
+    }
+  }, [])
 
   // Lock body scroll when mobile menu is open so page content
   // doesn't scroll behind the Safari URL bar chrome
@@ -69,6 +91,7 @@ export default function Navigation() {
             ? 'bg-[#080808] border-b border-[var(--rule)]'
             : 'bg-[#080808] md:bg-[linear-gradient(to_bottom,rgba(8,8,8,0.7),transparent)] md:border-none'
         }`}
+        style={{ top: viewportTop }}
       >
         <div
           className="md:hidden absolute -top-[128px] left-0 right-0 h-[128px] pointer-events-none"
