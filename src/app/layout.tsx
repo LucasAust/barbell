@@ -17,6 +17,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: "#080808",
   colorScheme: "dark",
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -26,6 +27,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Hard-coded theme-color fallback — belt AND suspenders for iOS 26 liquid glass */}
+        <meta name="theme-color" content="#080808" />
+        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#080808" />
+        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#080808" />
+      </head>
       <body className="antialiased">
         <ClientProviders>{children}</ClientProviders>
       </body>

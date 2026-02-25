@@ -61,7 +61,7 @@ export default function Navigation() {
       {/* ── Main header bar ── */}
       <motion.header
         role="banner"
-        style={{ zIndex: 500 } as React.CSSProperties}
+        style={{ zIndex: 500, paddingTop: 'env(safe-area-inset-top)' } as React.CSSProperties}
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
@@ -147,9 +147,10 @@ export default function Navigation() {
             className="md:hidden fixed inset-0 flex flex-col"
             style={{ backgroundColor: '#080808', zIndex: 501 } as React.CSSProperties}
           >
-            {/* Top bar — mirrors header height + safe area */}
+            {/* Top bar — mirrors header + safe area */}
             <div
               className="wrap flex items-center justify-between shrink-0"
+              style={{ paddingTop: 'env(safe-area-inset-top)' }}
             >
               <div className="flex items-center h-[72px]">
                 <span
