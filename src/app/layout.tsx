@@ -1,7 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import ClientProviders from "@/components/ClientProviders";
-import Navigation from "@/components/Navigation";
 
 export const metadata: Metadata = {
   title: "Gamecock Barbell Club | University of South Carolina",
@@ -15,6 +14,14 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+  themeColor: '#080808',
+  colorScheme: 'dark',
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -22,12 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <meta name="theme-color" content="#080808" />
-        <meta name="color-scheme" content="dark" />
-      </head>
       <body className="antialiased">
-        <Navigation />
         <ClientProviders>{children}</ClientProviders>
       </body>
     </html>

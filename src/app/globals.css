@@ -70,6 +70,8 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html {
+  height: 100dvh;
+  min-height: 100dvh;
   overflow-x: hidden;
   background: #080808;
   color-scheme: dark;
@@ -82,6 +84,7 @@ html {
 }
 
 body {
+  min-height: 100dvh;
   background: var(--black);
   color: var(--warm-white);
   font-family: var(--f-body);
