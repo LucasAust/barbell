@@ -68,7 +68,7 @@ export default function Navigation() {
   return (
     <>
       <div
-        className="md:hidden fixed left-0 right-0 -top-[160px] h-[320px] pointer-events-none z-[490]"
+        className="md:hidden fixed left-0 right-0 -top-[128px] h-[128px] pointer-events-none z-[490]"
         style={{
           backgroundColor: '#080808',
           transform: `translateY(${viewportTop}px)`,
@@ -161,39 +161,40 @@ export default function Navigation() {
             </button>
           )}
         </div>
-        <AnimatePresence>
-          {mobileOpen && (
-            <motion.nav
-              id="mobile-menu"
-              key="mobile-nav"
-              role="dialog"
-              aria-modal="true"
-              aria-label="Mobile navigation"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.15 }}
-              className="md:hidden fixed inset-0 overflow-hidden bg-[#080808] border-t border-[var(--rule)]"
-              style={{ zIndex: 499, transform: `translateY(${viewportTop}px)`, paddingTop: '72px' }}
-            >
-              <div className="wrap h-full flex flex-col justify-center gap-7 pb-16">
-                {NAV_ITEMS.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="font-[family-name:var(--f-display)] text-[var(--warm-white)] hover:text-[var(--garnet)] transition-colors"
-                    style={{ fontSize: 'clamp(2rem, 7vw, 3rem)', lineHeight: 1 }}
-                    data-cursor="hover"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </motion.nav>
-          )}
-        </AnimatePresence>
       </motion.header>
+
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.nav
+            id="mobile-menu"
+            key="mobile-nav"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+            className="md:hidden fixed top-0 left-0 right-0 bottom-0 overflow-hidden bg-[#080808] border-t border-[var(--rule)]"
+            style={{ zIndex: 499, transform: `translateY(${viewportTop}px)`, paddingTop: '72px' }}
+          >
+            <div className="wrap h-[calc(100svh-72px)] overflow-y-auto flex flex-col justify-center gap-7 pb-16">
+              {NAV_ITEMS.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="font-[family-name:var(--f-display)] text-[var(--warm-white)] hover:text-[var(--garnet)] transition-colors"
+                  style={{ fontSize: 'clamp(2rem, 7vw, 3rem)', lineHeight: 1 }}
+                  data-cursor="hover"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </>
   )
 }
