@@ -114,7 +114,7 @@ export default function Navigation() {
         </button>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile menu — full-screen fixed overlay */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.nav
@@ -122,13 +122,36 @@ export default function Navigation() {
             key="mobile-nav"
             role="navigation"
             aria-label="Mobile navigation"
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="md:hidden bg-[var(--black)]/98 border-b border-[var(--rule)] backdrop-blur-xl"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="md:hidden fixed inset-0 bg-[var(--black)] flex flex-col"
+            style={{ zIndex: 'var(--z-nav)' } as React.CSSProperties}
           >
-            <div className="wrap pt-8 pb-16 flex flex-col gap-6">
+            {/* Header row inside overlay */}
+            <div className="wrap flex items-center justify-between h-[72px] shrink-0">
+              <span
+                className="font-[family-name:var(--f-display)] text-[var(--warm-white)] leading-none"
+                style={{ fontSize: 'clamp(1.2rem, 2vw, 1.6rem)', letterSpacing: '0.03em', fontWeight: 700 }}
+              >
+                GBC
+              </span>
+              <button
+                onClick={() => setMobileOpen(false)}
+                aria-label="Close menu"
+                className="p-2 text-[var(--warm-white)]"
+                data-cursor="hover"
+              >
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <line x1="2" y1="2" x2="18" y2="18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                  <line x1="18" y1="2" x2="2" y2="18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                </svg>
+              </button>
+            </div>
+
+            {/* Nav links */}
+            <div className="wrap flex-1 flex flex-col justify-center gap-6 pb-16">
               {NAV_ITEMS.map((item) => (
                 <Link
                   key={item.href}
