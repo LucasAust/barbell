@@ -48,14 +48,14 @@ export default function Navigation() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-          className={`relative z-10 transition-all duration-500 border-b border-[rgba(237,232,223,0.14)] bg-[rgba(8,8,8,0.46)] backdrop-blur-xl md:backdrop-blur-none ${
+          className={`relative z-10 transition-all duration-500 mx-3 mt-2 rounded-[24px] border border-[rgba(237,232,223,0.18)] bg-[rgba(8,8,8,0.52)] backdrop-blur-2xl md:mx-0 md:mt-0 md:rounded-none md:border-none md:backdrop-blur-none ${
             scrolled
               ? 'md:bg-[#080808] md:border-b md:border-[var(--rule)]'
               : 'md:bg-[linear-gradient(to_bottom,rgba(8,8,8,0.7),transparent)] md:border-none'
           }`}
           style={{ paddingTop: 'env(safe-area-inset-top)' }}
         >
-          <div className="wrap flex items-center justify-between h-[72px] lg:h-[84px]">
+          <div className="wrap flex items-center justify-between h-[60px] md:h-[72px] lg:h-[84px]">
           {/* Logo */}
           <Magnetic intensity={0.3}>
             <Link
@@ -113,7 +113,7 @@ export default function Navigation() {
             </button>
           ) : (
             <button
-              className="md:hidden flex items-center justify-center h-[72px] px-2 text-[var(--warm-white)]"
+              className="md:hidden flex items-center justify-center h-[60px] px-2 text-[var(--warm-white)]"
               onClick={() => setMobileOpen(false)}
               aria-label="Close menu"
               aria-expanded={mobileOpen}
@@ -142,7 +142,7 @@ export default function Navigation() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.15 }}
               className="md:hidden fixed left-0 right-0 bottom-0 overflow-hidden bg-[#080808] border-t border-[var(--rule)]"
-              style={{ zIndex: 499, top: 'calc(env(safe-area-inset-top) + 72px)' }}
+              style={{ zIndex: 499, top: 'calc(env(safe-area-inset-top) + 68px)' }}
             >
               <div className="wrap h-full overflow-y-auto flex flex-col justify-center gap-7 pb-16">
                 {NAV_ITEMS.map((item) => (
