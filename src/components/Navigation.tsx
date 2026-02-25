@@ -31,6 +31,8 @@ export default function Navigation() {
     const vv = window.visualViewport
     if (!vv) return
 
+    let frameId = 0
+
     const updateViewportTop = () => {
       const isMobile = window.innerWidth < 768
       if (!isMobile) {
@@ -42,15 +44,22 @@ export default function Navigation() {
       setViewportTop((prev) => (prev === topOffset ? prev : topOffset))
     }
 
+    const tick = () => {
+      updateViewportTop()
+      frameId = window.requestAnimationFrame(tick)
+    }
+
     updateViewportTop()
     vv.addEventListener('resize', updateViewportTop)
     vv.addEventListener('scroll', updateViewportTop)
     window.addEventListener('resize', updateViewportTop)
+    frameId = window.requestAnimationFrame(tick)
 
     return () => {
       vv.removeEventListener('resize', updateViewportTop)
       vv.removeEventListener('scroll', updateViewportTop)
       window.removeEventListener('resize', updateViewportTop)
+      window.cancelAnimationFrame(frameId)
     }
   }, [])
 
@@ -78,7 +87,7 @@ export default function Navigation() {
             ? 'bg-[#080808] border-b border-[var(--rule)]'
             : 'bg-[#080808] md:bg-[linear-gradient(to_bottom,rgba(8,8,8,0.7),transparent)] md:border-none'
         }`}
-        style={{ transform: `translateY(${viewportTop}px)` }}
+        style={{ transform: `translate3d(0, ${viewportTop}px, 0)`, willChange: 'transform' }}
       >
         <div
           className="md:hidden absolute left-0 right-0 bottom-full h-[100svh] pointer-events-none"
@@ -173,7 +182,7 @@ export default function Navigation() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
             className="md:hidden fixed top-0 left-0 right-0 bottom-0 overflow-hidden bg-[#080808] border-t border-[var(--rule)]"
-            style={{ zIndex: 499, transform: `translateY(${viewportTop}px)`, paddingTop: '72px' }}
+            style={{ zIndex: 499, transform: `translate3d(0, ${viewportTop}px, 0)`, willChange: 'transform', paddingTop: '72px' }}
           >
             <div className="wrap h-[calc(100svh-72px)] overflow-y-auto flex flex-col justify-center gap-7 pb-16">
               {NAV_ITEMS.map((item) => (
