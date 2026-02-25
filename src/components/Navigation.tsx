@@ -65,7 +65,7 @@ export default function Navigation() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-        className={`sticky top-0 left-0 right-0 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 transition-all duration-500 ${
           scrolled
             ? 'bg-[#080808] border-b border-[var(--rule)]'
             : 'bg-[#080808] md:bg-[linear-gradient(to_bottom,rgba(8,8,8,0.7),transparent)] md:border-none'
@@ -148,7 +148,7 @@ export default function Navigation() {
             style={{ backgroundColor: '#080808', zIndex: 501 } as React.CSSProperties}
           >
             {/* Top bar — mirrors header */}
-            <div className="safe-area-top wrap flex items-center justify-between shrink-0">
+            <div className="wrap flex items-center justify-between shrink-0">
               <div className="flex items-center h-[72px]">
                 <span
                   className="font-[family-name:var(--f-display)] text-[var(--warm-white)] leading-none"
