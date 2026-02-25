@@ -17,6 +17,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: "#080808",
   viewportFit: "cover",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({
@@ -27,6 +28,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
+        {/* Solid black fill behind the iOS safe-area / status-bar — always on top of everything */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 'env(safe-area-inset-top)',
+            backgroundColor: '#080808',
+            zIndex: 9999,
+          }}
+        />
         <ClientProviders>{children}</ClientProviders>
       </body>
     </html>
