@@ -141,10 +141,10 @@ export default function Navigation() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.15 }}
-              className="md:hidden fixed left-0 right-0 bottom-0 overflow-hidden bg-[#080808] border-t border-[var(--rule)]"
-              style={{ zIndex: 499, top: 'calc(env(safe-area-inset-top) + 68px)' }}
+              className="md:hidden fixed left-3 right-3 bottom-3 overflow-hidden rounded-[24px] border border-[rgba(237,232,223,0.18)] bg-[rgba(8,8,8,0.72)] backdrop-blur-2xl"
+              style={{ zIndex: 499, top: 'calc(env(safe-area-inset-top) + 72px)' }}
             >
-              <div className="wrap h-full overflow-y-auto flex flex-col justify-center gap-7 pb-16">
+              <div className="wrap h-full overflow-y-auto flex flex-col justify-center gap-7 py-10">
                 {NAV_ITEMS.map((item) => (
                   <Link
                     key={item.href}
