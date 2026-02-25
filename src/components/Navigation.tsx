@@ -16,7 +16,6 @@ const NAV_ITEMS = [
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [viewportTop, setViewportTop] = useState(0)
 
   const handleScroll = useCallback(() => {
     setScrolled(window.scrollY > 60)
@@ -26,43 +25,6 @@ export default function Navigation() {
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
-
-  useEffect(() => {
-    const vv = window.visualViewport
-    if (!vv) return
-
-    let frameId = 0
-
-    const updateViewportTop = () => {
-      const isMobile = window.innerWidth < 768
-      if (!isMobile) {
-        setViewportTop(0)
-        return
-      }
-
-      const rawTop = vv.offsetTop || 0
-      const nextTop = Math.min(160, Math.max(0, rawTop))
-      setViewportTop((prev) => (prev === nextTop ? prev : nextTop))
-    }
-
-    const tick = () => {
-      updateViewportTop()
-      frameId = window.requestAnimationFrame(tick)
-    }
-
-    updateViewportTop()
-    vv.addEventListener('resize', updateViewportTop)
-    vv.addEventListener('scroll', updateViewportTop)
-    window.addEventListener('resize', updateViewportTop)
-    frameId = window.requestAnimationFrame(tick)
-
-    return () => {
-      vv.removeEventListener('resize', updateViewportTop)
-      vv.removeEventListener('scroll', updateViewportTop)
-      window.removeEventListener('resize', updateViewportTop)
-      window.cancelAnimationFrame(frameId)
-    }
-  }, [])
 
   useEffect(() => {
     if (!mobileOpen) return
@@ -78,14 +40,7 @@ export default function Navigation() {
   return (
     <>
       <div
-        className="md:hidden fixed top-0 left-0 right-0 pointer-events-none z-[499]"
-        style={{ height: viewportTop, backgroundColor: '#080808' }}
-        aria-hidden="true"
-      />
-
-      <div
         className="fixed top-0 left-0 right-0 z-[500]"
-        style={{ transform: `translate3d(0, ${viewportTop}px, 0)`, willChange: 'transform' }}
       >
         {/* ── Main header bar ── */}
         <motion.header
@@ -98,6 +53,7 @@ export default function Navigation() {
               ? 'bg-[#080808] border-b border-[var(--rule)]'
               : 'bg-[#080808] md:bg-[linear-gradient(to_bottom,rgba(8,8,8,0.7),transparent)] md:border-none'
           }`}
+          style={{ paddingTop: 'env(safe-area-inset-top)' }}
         >
           <div className="wrap flex items-center justify-between h-[72px] lg:h-[84px]">
           {/* Logo */}
@@ -185,10 +141,10 @@ export default function Navigation() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.15 }}
-              className="md:hidden absolute top-0 left-0 right-0 h-[100svh] overflow-hidden bg-[#080808] border-t border-[var(--rule)]"
-              style={{ zIndex: 9, paddingTop: '72px' }}
+              className="md:hidden fixed left-0 right-0 bottom-0 overflow-hidden bg-[#080808] border-t border-[var(--rule)]"
+              style={{ zIndex: 499, top: 'calc(env(safe-area-inset-top) + 72px)' }}
             >
-              <div className="wrap h-[calc(100svh-72px)] overflow-y-auto flex flex-col justify-center gap-7 pb-16">
+              <div className="wrap h-full overflow-y-auto flex flex-col justify-center gap-7 pb-16">
                 {NAV_ITEMS.map((item) => (
                   <Link
                     key={item.href}
